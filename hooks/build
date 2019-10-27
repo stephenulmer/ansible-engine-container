@@ -1,0 +1,12 @@
+#!/bin/sh
+##
+## Perform a parameterized build of the container
+##
+
+. ./hooks/env
+
+docker build \
+	--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \ 
+	--build-arg VCS_REF="$VCS_REF" \
+	${VERSION:+--build-arg VERSION="$VERSION"} \
+	-t $IMAGE_NAME .
