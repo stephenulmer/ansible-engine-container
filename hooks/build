@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ##
 ## Perform a parameterized build of the container
 ##
