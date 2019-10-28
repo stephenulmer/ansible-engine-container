@@ -23,12 +23,18 @@ ARG VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.version=$VERSION
+LABEL org.label-schema.docker.cmd="docker run -it --rm -v \$(pwd):/work ulmer/ansible-engine-container:$VERSION"
 LABEL version=$VERSION
 
-VOLUME /work
-
-ENV PATH="/root/.local/bin:${PATH}"
 RUN apk add --no-cache bash git
-COPY --from=buildenv /root/.local /root/.local
+RUN adduser -g "Ansible User" -s /bin/bash -D ansible \
+    && addgroup ansible root \
+    && echo 'export PS1="\u:\w\$ "' >> /home/ansible/.bashrc
+COPY --from=buildenv --chown=ansible:ansible /root/.local /home/ansible/.local
+
+ENV PATH="/home/ansible/.local/bin:${PATH}"
+USER ansible
+VOLUME /work
+WORKDIR /work
 
 CMD ["/bin/bash"]
