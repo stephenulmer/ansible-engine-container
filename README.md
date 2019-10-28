@@ -10,7 +10,7 @@ The environment contains ansible, molecule, git, and other supporting tools.
 docker run -it --rm -v $(pwd):/work ansible-engine-container
 ```
 
-If you want to use the Docker driver for molecule, then you need acces to the
+If you want to use the Docker driver for molecule, then you need access to the
 host's Docker daemon from inside the ansible container. Include these volume
 mappings as part of your `docker run ...`:
 
