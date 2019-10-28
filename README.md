@@ -2,13 +2,24 @@
 
 A small container from which to run Ansible.
 
+The environment contains ansible, molecule, git, and other supporting tools.
+
 ## Usage
 
 ```
 docker run -it --rm -v $(pwd):/work ansible-engine-container
 ```
 
-The environment contains ansible, molecule, git, and other supporting tools.
+If you ant to use the docker driver for molecule, then you need acces to the
+host's Docker daemon from inside the container. Include these volume mappings with
+your `docker run ...`:
+
+```
+-v /usr/local/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock
+```
+
+This will work in Docker Desktop for Windows and Docker Desktop for Mac.
+
 
 ## Background
 
