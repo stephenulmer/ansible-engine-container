@@ -1,0 +1,9 @@
+#!/bin/bash
+##
+## Adds "latest" tag to the just-built image and pushes.
+##
+
+. ./hooks/env
+
+docker tag ${IMAGE_NAME} ${BASENAME}:latest
+docker push ${BASENAME}:latest
