@@ -2,14 +2,17 @@
 ## ulmer/ansible-engine-container
 ##
 
+## Base tag for upstream Python container image
+ARG PYTHON_VERSION
+
 ## Build Container
-FROM python:3.8.0 AS buildenv
+FROM python:$PYTHON_VERSION AS buildenv
 ENV PATH="/root/.local/bin:${PATH}"
 RUN pip3 install --user ansible molecule molecule[openstack] docker-py python-vagrant
 
 
 ## Deployment Container
-FROM python:3.8.0-alpine
+FROM python:$PYTHON_VERSION-alpine
 LABEL maintainer="ulmer@ulmer.org"
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.name="ulmer/ansible-engine-container"

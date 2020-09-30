@@ -7,7 +7,7 @@ The environment contains ansible, molecule, git, and other supporting tools.
 ## Usage
 
 ```
-docker run -it --rm -v $(pwd):/work ansible-engine-container
+docker run -it --rm -v $(pwd):/work ulmer/ansible-engine-container
 ```
 
 If you want to use the Docker driver for molecule, then you need access to the
